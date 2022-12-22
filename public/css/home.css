@@ -1,0 +1,51 @@
+.header-image {
+    background-image: url('/background/school_buses.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.top-container {
+    position: relative;
+}
+
+.left, .right {
+    position: absolute;
+    width: 10px;
+    top: 0;
+    bottom: 0;
+    background: white;
+    /* Add the blur effect */
+  filter: blur(20px);
+  -webkit-filter: blur(8px);
+}
+  
+.right {
+    right: 0;
+}
+
+.carroussel {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.card-custom {
+    display: inline-block;
+    background-color: aliceblue;
+    width: 200px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+
+}
+
+.card-centralization {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-image-custom {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
