@@ -34,7 +34,7 @@
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
                         <h5 class="card-title">Malhampsene</h5>
-                        <a href="#" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
+                        <a href="/carrinhas/nome" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
                         <h5 class="card-title">Malhampsene</h5>
-                        <a href="#" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
+                        <a href="/carrinhas/nome" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
                         <h5 class="card-title">Malhampsene</h5>
-                        <a href="#" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
+                        <a href="/carrinhas/nome" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
                         <h5 class="card-title">Malhampsene</h5>
-                        <a href="#" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
+                        <a href="/carrinhas/nome" class="btn btn-primary w-75 d-flex justify-content-center mt-2 mx-1 px-5">Reservar</a>
                     </div>
                 </div>
             </div>

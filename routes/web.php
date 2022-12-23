@@ -18,15 +18,23 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', function () {
-    return view('admin.home.home');
+    return view('admin.home');
 });
 
 Route::get('/admin/carrinhas', function () {
-    return view('admin.carrinhas.schoolbuses');
+    return view('admin.schoolbuses');
 });
 
 Route::get('/admin/motoristas', function () {
-    return view('admin.motoristas.drivers');
+    return view('admin.drivers');
+});
+
+Route::get('/admin/clientes', function () {
+    return view('admin.clients');
+});
+
+Route::get('/admin/perfil', function () {
+    return view('admin.profile');
 });
 
 Route::get('/contactos', function () {
@@ -55,4 +63,8 @@ Route::get('/perfil', function () {
 
 Route::get('/userid/reservas', function () {
     return view('user.reserves');
+});
+
+Route::get('/user/reservas/id', function () {
+    return view('user.reserve_details');
 });

@@ -23,7 +23,7 @@
                     </div>
                     <h6 class="text-success">Activo</h6>
                     <div class="d-flex flex-column mt-4">
-                        <button class="btn btn-primary btn-sm" type="button">Detalhes</button>
+                        <a href="/user/reservas/id" class="btn btn-primary btn-sm" onclick="" type="button">Detalhes</a>
                         <button class="btn btn-danger btn-sm mt-2" type="button">Cancelar</button>
                     </div>
                 </div>

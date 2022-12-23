@@ -21,9 +21,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="/contactos">Contactos</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="/entrar">Entrar</a>
             </li>
