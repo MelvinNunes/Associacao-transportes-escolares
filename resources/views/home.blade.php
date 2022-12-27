@@ -27,9 +27,9 @@
         <div class="right">
         </div>
         <!-- List -->
-        <div class="d-flex flex-row carroussel gap-4 p-3">
+        <div class="d-flex flex-row carroussel p-3">
             <!-- Card -->
-            <div class="card-custom">
+            <div class="card-custom mr-4">
                 <div class="card-centralization">
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <!-- Card -->
-            <div class="card-custom">
+            <div class="card-custom mr-4">
                 <div class="card-centralization">
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <!-- Card -->
-            <div class="card-custom">
+            <div class="card-custom mr-4">
                 <div class="card-centralization">
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <!-- Card -->
-            <div class="card-custom">
+            <div class="card-custom mr-4">
                 <div class="card-centralization">
                     <img class="card-image-custom" src="/school_bus.png" alt="bus">
                     <div class="card-body card-centralization">

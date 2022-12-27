@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,14 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\IndexController;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [IndexController::class, 'index']);
 
-Route::get('/admin', function () {
-    return view('admin.home');
-});
+Route::get('/admin', [AdminController::class, 'index']);
 
 Route::get('/admin/carrinhas', function () {
     return view('admin.schoolbuses');
@@ -67,4 +65,8 @@ Route::get('/userid/reservas', function () {
 
 Route::get('/user/reservas/id', function () {
     return view('user.reserve_details');
+});
+
+Route::get('/userid/reservas/id', function () {
+    return view('user.reserve_details_pay');
 });
