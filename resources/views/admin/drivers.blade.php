@@ -2,6 +2,11 @@
 
 @section('admin-content')
 <div>
+    @if(session('motorista'))
+    <script>
+        swal("Adicionado!", "Motorista adicionado com sucesso!", "success");
+    </script>
+    @endif
     <div class="d-flex">
         <!-- Modal -->
         <!-- Button trigger modal -->
@@ -55,13 +60,15 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($motoristas)!=0)
+                @foreach($motoristas as $motorista)
                 <tr>
-                    <td>Kiven Mateus</td>
-                    <td>20122121</td>
-                    <td>Bairro do Aeroporto</td>
-                    <td>1990/01/01</td>
-                    <td>2019/01/01</td>
-                    <td>AdminMelvin</td>
+                    <td>{{ $motorista->nome_motorista }}</td>
+                    <td>{{ $motorista->nr_carta }}</td>
+                    <td>{{ $motorista->morada }}</td>
+                    <td>{{ date('d/m/Y', strtotime($motorista->data_nasci)) }}</td>
+                    <td>{{ date('d/m/Y H:m', strtotime($motorista->created_at)) }}</td>
+                    <td>N/A</td>
                     <td>
                         <button class="btn btn-info" data-toggle="modal" data-target="#editModal">
                             <img width="15" height="15" src="{{ URL::to('/') }}/buttons/edit.png" alt="edit">
@@ -73,7 +80,17 @@
                         </button>
                     </td>
                 </tr>
-
+                @endforeach
+                @else
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>
@@ -84,40 +101,42 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Motorista</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
+                <form action="/admin/motorista" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Motorista</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
                         <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome" placeholder="ex: Jõao Paulo">
+                            <label for="nome_motorista">Nome Completo</label>
+                            <input name="nome_motorista" type="text" class="form-control" id="nome_motorista" placeholder="ex: Jõao Paulo">
                         </div>
                         <div class="form-group">
                             <label for="morada">Morada</label>
-                            <input type="text" class="form-control" id="morada" placeholder="Av. Eduardo Mondlane, n2526">
+                            <input name="morada" type="text" class="form-control" id="morada" placeholder="Av. Eduardo Mondlane, n2526">
                         </div>
                         <div class="form-group">
-                            <label for="dataNasci">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="dataNasci">
+                            <label for="data_nasci">Data de Nascimento</label>
+                            <input name="data_nasci" type="date" class="form-control" id="data_nasci">
                         </div>
                         <div class="form-group">
-                            <label for="nrCarta">Número da Carta</label>
-                            <input type="text" class="form-control" id="nrCarta" placeholder="Av. Eduardo Mondlane, n2526">
+                            <label for="nr_carta">Número da Carta</label>
+                            <input name="nr_carta" type="text" class="form-control" id="nr_carta" placeholder="Número da Carta">
                         </div>
                         <div class="form-group">
-                            <label for="dataEmiCarta">Data de Emissão da Carta</label>
-                            <input type="date" class="form-control" id="dataEmiCarta">
+                            <label for="data_emissao_carta">Data de Emissão da Carta</label>
+                            <input name="data_emissao_carta" type="date" class="form-control" id="data_emissao_carta">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                    <button type="button" class="btn btn-success">Adicionar</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                        <input type="submit" value="Adicionar" class="btn btn-success" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>

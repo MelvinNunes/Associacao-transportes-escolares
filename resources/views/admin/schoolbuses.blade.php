@@ -2,6 +2,11 @@
 
 @section('admin-content')
 <div>
+    @if(session('carrinha'))
+    <script>
+        swal("Adicionada!", "Carrinha adicionada com sucesso!", "success");
+    </script>
+    @endif
     <div class="d-flex">
         <!-- Modal -->
         <!-- Button trigger modal -->
@@ -32,7 +37,10 @@
                         Nome da carrinha
                     </th>
                     <th class="th-sm">
-                        Lotação
+                        Lotação(Lugares)
+                    </th>
+                    <th class="th-sm">
+                        Preço(MZN)
                     </th>
                     <th class="th-sm">
                         Motorista
@@ -52,12 +60,15 @@
                 </tr>
             </thead>
             <tbody>
+                @if(count($carrinhas)!=0)
+                @foreach($carrinhas as $carrinha)
                 <tr>
-                    <td>Matola</td>
-                    <td>20</td>
-                    <td>Pedro Chipande</td>
-                    <td>2019/01/01</td>
-                    <td>AdminMelvin</td>
+                    <td>{{ $carrinha->rota }}</td>
+                    <td>{{ $carrinha->nr_lugares }}</td>
+                    <td>{{ $carrinha->preco }}</td>
+                    <td>NomeMotorista</td>
+                    <td>{{ date('d/m/Y H:m', strtotime($carrinha->created_at)) }}</td>
+                    <td>CriadoPor</td>
                     <td>
                         <button class="btn btn-info" data-toggle="modal" data-target="#editModal">
                             <img width="15" height="15" src="{{ URL::to('/') }}/buttons/edit.png" alt="edit">
@@ -69,7 +80,17 @@
                         </button>
                     </td>
                 </tr>
-
+                @endforeach
+                @else
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                    <td>N/A</td>
+                </tr>
+                @endif
             </tbody>
         </table>
     </div>
@@ -80,49 +101,52 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Adicionar Carrinha</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
+                <form action="/admin/carrinha" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Carrinha</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group">
-                            <label for="nomeCarrinha">Nome da Carrinha</label>
-                            <input type="text" class="form-control" id="nomeCarrinha" placeholder="ex: Matola">
+                            <label for="rota">Rota da Carrinha</label>
+                            <input type="text" name="rota" class="form-control" id="rota" placeholder="ex: Matola">
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="inputState">Motorista da Carrinha</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Seleccione uma opção</option>
-                                    <option>Mateus Junior</option>
+                                <label for="id_motorista">Motorista da Carrinha</label>
+                                <select name="id_motorista" id="id_motorista" class="form-control">
+                                    <option selected value="null">Seleccione uma opção</option>
+                                    @foreach($motoristas as $motorista)
+                                    <option value="{{ $motorista->id }}">{{ $motorista->nome_motorista }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="contactoCarrinha">Contacto</label>
-                            <input type="text" class="form-control" id="contactoCarrinha" placeholder="ex: 840000000">
+                            <label for="contacto">Contacto</label>
+                            <input type="text" name="contacto" class="form-control" id="contacto" placeholder="ex: 840000000">
                         </div>
                         <div class="form-group">
-                            <label for="rota">Rota</label>
-                            <input type="text" class="form-control" id="rota" placeholder="ex: Matola - Cidade de Maputo">
-                        </div>
-                        <div class="form-group">
-                            <label for="lotacao">Lotação</label>
-                            <input type="number" class="form-control" id="lotacao" placeholder="ex: 25">
+                            <label for="nr_lugares">Lotação</label>
+                            <input type="number" name="nr_lugares" class="form-control" id="nr_lugares" placeholder="ex: 25">
                         </div>
                         <div class="form-group">
                             <label for="preco">Preço (MZN)</label>
-                            <input type="number" class="form-control" id="preco" placeholder="ex: 500.00">
+                            <input type="number" name="preco" class="form-control" id="preco" placeholder="ex: 500.00">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                    <button type="button" class="btn btn-success">Adicionar</button>
-                </div>
+                        <div class="form-group">
+                            <label for="image">Foto da carrinha</label>
+                            <input type="file" name="image" class="form-control" id="image">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
+                        <input type="submit" value="Adicionar" class="btn btn-success" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -142,7 +166,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="nomeCarrinha">Nome da Carrinha</label>
+                            <label for="nomeCarrinha">Rota da Carrinha</label>
                             <input type="text" class="form-control" id="nomeCarrinha" placeholder="ex: Matola">
                         </div>
                         <div class="form-row">
@@ -159,16 +183,16 @@
                             <input type="text" class="form-control" id="contactoCarrinha" placeholder="ex: 840000000">
                         </div>
                         <div class="form-group">
-                            <label for="rota">Rota</label>
-                            <input type="text" class="form-control" id="rota" placeholder="ex: Matola - Cidade de Maputo">
-                        </div>
-                        <div class="form-group">
                             <label for="lotacao">Lotação</label>
                             <input type="number" class="form-control" id="lotacao" placeholder="ex: 25">
                         </div>
                         <div class="form-group">
                             <label for="preco">Preço (MZN)</label>
                             <input type="number" class="form-control" id="preco" placeholder="ex: 500.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Foto da carrinha</label>
+                            <input type="file" name="image" class="form-control" id="image">
                         </div>
                     </form>
                 </div>

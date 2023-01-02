@@ -15,17 +15,16 @@ return new class extends Migration
     {
         Schema::create('motoristas', function (Blueprint $table) {
             $table->id();
-            $table->string('nomeMotorista');
+            $table->string('nome_motorista');
             $table->string('morada');
-            $table->string('nrCarta');
-            $table->date('dataNasci');
-            $table->date('dataEmissaoCarta');
-            $table->dateTime('criado_em');
-            $table->unsignedBigInteger('criado_por');
-            $table->foreign('criado_por')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->unsignedBigInteger('modificado_por');
-            $table->foreign('modificado_por')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->dateTime('modificado_em');
+            $table->string('nr_carta');
+            $table->date('data_nasci');
+            $table->date('data_emissao_carta');
+            $table->unsignedBigInteger('criado_por')->nullable();
+            $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('modificado_por')->nullable();
+            $table->foreign('modificado_por')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

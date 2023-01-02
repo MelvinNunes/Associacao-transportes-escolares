@@ -19,12 +19,15 @@ return new class extends Migration
             $table->foreign('id_motorista')->references('id')->on('motoristas')->onDelete('cascade');
             $table->string('contacto');
             $table->string('rota');
-            $table->dateTime('criado_em');
-            $table->unsignedBigInteger('criado_por');
-            $table->foreign('criado_por')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->unsignedBigInteger('modificado_por');
-            $table->foreign('modificado_por')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->dateTime('modificado_em');
+            $table->integer('nr_lugares');
+            $table->integer('nr_lugares_disponiveis');
+            $table->double('preco');
+            $table->string('image');
+            $table->unsignedBigInteger('criado_por')->nullable();
+            $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('modificado_por')->nullable();
+            $table->foreign('modificado_por')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

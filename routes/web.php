@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarrinhaController;
+use App\Http\Controllers\ClientsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,59 +17,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MotoristaController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [IndexController::class, 'index']);
 
 Route::get('/admin', [AdminController::class, 'index']);
 
-Route::get('/admin/carrinhas', function () {
-    return view('admin.schoolbuses');
-});
+Route::get('/admin/carrinhas', [CarrinhaController::class, 'index_admin']);
 
-Route::get('/admin/motoristas', function () {
-    return view('admin.drivers');
-});
+Route::post('/admin/carrinha', [CarrinhaController::class, 'store']);
 
-Route::get('/admin/clientes', function () {
-    return view('admin.clients');
-});
+Route::get('/admin/motoristas', [MotoristaController::class, 'index']);
 
-Route::get('/admin/perfil', function () {
-    return view('admin.profile');
-});
+Route::post('/admin/motorista', [MotoristaController::class, 'store']);
 
-Route::get('/contactos', function () {
-    return view('contact');
-});
+Route::get('/admin/clientes', [ClientsController::class, 'index']);
 
-Route::get('/entrar', function () {
-    return view('auth.login');
-});
+Route::get('/admin/perfil', [UserController::class, 'admin']);
 
-Route::get('/registrar', function () {
-    return view('auth.logon');
-});
+Route::get('/s', [IndexController::class, 'search_rota']);
 
-Route::get('/carrinhas', function () {
-    return view('carrinha.buslist');
-});
+Route::get('/contactos', [IndexController::class, 'index_contacts']);
 
-Route::get('/carrinhas/nome', function () {
-    return view('reserva.reserve');
-});
+Route::get('/entrar', [AuthController::class, 'index_login']);
 
-Route::get('/perfil', function () {
-    return view('user.profile');
-});
+Route::get('/registrar', [AuthController::class, 'index_logon']);
 
-Route::get('/userid/reservas', function () {
-    return view('user.reserves');
-});
+Route::get('/carrinhas', [CarrinhaController::class, 'index']);
 
-Route::get('/user/reservas/id', function () {
-    return view('user.reserve_details');
-});
+Route::get('/carrinhas/{rota}', [CarrinhaController::class, 'findOne']);
 
-Route::get('/userid/reservas/id', function () {
-    return view('user.reserve_details_pay');
+Route::get('/perfil', [UserController::class, 'me']);
+
+Route::get('/{id}/reservas', [UserController::class, 'get_user_reserves']);
+
+Route::get('/u={id}/reservas/{reserve}', [UserController::class, 'get_reserve']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 });

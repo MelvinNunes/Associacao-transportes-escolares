@@ -17,13 +17,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_reserva');
             $table->foreign('id_reserva')->references('id')->on('reservas')->onDelete('cascade');
-            $table->unsignedBigInteger('criado_por');
-            $table->dateTime('criado_em');
-            $table->unsignedBigInteger('criado_por');
-            $table->foreign('criado_por')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->unsignedBigInteger('modificado_por');
-            $table->foreign('modificado_por')->references('id')->on('usuarios')->onDelete('cascade');
-            $table->dateTime('modificado_em');
+            $table->float('valor');
+            $table->timestamp('data_pagamento');
+            $table->unsignedBigInteger('criado_por')->nullable();
+            $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('modificado_por')->nullable();
+            $table->foreign('modificado_por')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
