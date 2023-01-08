@@ -6,7 +6,7 @@
     </div>
 
     <ul class="list-unstyled components">
-        <p class="text-secondary">Katia M</p>
+        <!-- <p class="text-secondary">Katia M</p> -->
         <li>
             <a href="/admin">Home</a>
         </li>
@@ -33,8 +33,8 @@
         <li>
             <a href="/admin/clientes">Clientes</a>
         </li>
-        <li>
+        <!-- <li>
             <a href="/admin/perfil">Meu Perfil</a>
-        </li>
+        </li> -->
     </ul>
 </nav>

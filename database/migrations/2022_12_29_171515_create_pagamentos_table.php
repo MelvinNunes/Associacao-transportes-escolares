@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_reserva');
             $table->foreign('id_reserva')->references('id')->on('reservas')->onDelete('cascade');
-            $table->float('valor');
+            $table->unsignedBigInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
+            $table->string('contacto');
             $table->timestamp('data_pagamento');
             $table->unsignedBigInteger('criado_por')->nullable();
             $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');

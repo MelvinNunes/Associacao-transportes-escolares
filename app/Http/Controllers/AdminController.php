@@ -9,6 +9,9 @@ class AdminController extends Controller
     //
     public function index()
     {
-        return view('admin.home');
+        $user = auth()->user();
+        if ($user->is_admin) {
+            return view('admin.home', ['user' => $user]);
+        }
     }
 }

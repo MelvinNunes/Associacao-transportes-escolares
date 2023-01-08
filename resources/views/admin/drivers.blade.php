@@ -1,5 +1,9 @@
 @extends('admin.index')
 
+<head>
+    <link href="{{ asset('css/button.css') }}" rel="stylesheet">
+</head>
+
 @section('admin-content')
 <div>
     @if(session('motorista'))
@@ -7,7 +11,22 @@
         swal("Adicionado!", "Motorista adicionado com sucesso!", "success");
     </script>
     @endif
-    <div class="d-flex">
+    @if(session('updated'))
+    <script>
+        swal("Atualizado!", "Motorista atualizado com sucesso!", "info");
+    </script>
+    @endif
+    @if(session('deleted'))
+    <script>
+        swal("Deletado!", "Motorista apagado com sucesso!", "success");
+    </script>
+    @endif
+    @if(session('erro_adding'))
+    <script>
+        swal("Erro!", "{{ session('erro_adding') }}", "error");
+    </script>
+    @endif
+    <div class="d-flex align-items-center">
         <!-- Modal -->
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
@@ -18,11 +37,11 @@
         <!-- Search -->
         <div class="input-group d-flex justify-content-end">
             <div class="form-outline">
-                <div class="d-flex gap-2">
-                    <input type="search" id="form1" class="form-control" placeholder="Nome da Carrinha" />
-                    <button type="button" class="btn btn-primary">
-                        Pesquisar
-                    </button>
+                <div>
+                    <form method="GET" action="/admin/motoristas/s" class="d-flex gap-2">
+                        <input type="search" id="nome_motorista" name="nome_motorista" class="form-control" placeholder="Nome do Motorista" />
+                        <input type="submit" class="btn btn-primary" value="Pesquisar">
+                    </form>
                 </div>
             </div>
         </div>
@@ -68,16 +87,17 @@
                     <td>{{ $motorista->morada }}</td>
                     <td>{{ date('d/m/Y', strtotime($motorista->data_nasci)) }}</td>
                     <td>{{ date('d/m/Y H:m', strtotime($motorista->created_at)) }}</td>
-                    <td>N/A</td>
+                    <td>{{ $motorista->owner->name }}</td>
                     <td>
-                        <button class="btn btn-info" data-toggle="modal" data-target="#editModal">
-                            <img width="15" height="15" src="{{ URL::to('/') }}/buttons/edit.png" alt="edit">
-                        </button>
+                        <a class="btn btn-info button" href="/admin/motorista/{{ $motorista->id }}">
+                            Editar
+                        </a>
                     </td>
                     <td>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                            <img width="15" height="15" src="{{ URL::to('/') }}/buttons/delete.png" alt="edit">
-                        </button>
+                        <form action="/admin/motorista/delete/{{ $motorista->id }}" method="POST">
+                            @csrf
+                            <input type="submit" class="btn btn-danger button" value="Apagar">
+                        </form>
                     </td>
                 </tr>
                 @endforeach
@@ -116,6 +136,10 @@
                             <input name="nome_motorista" type="text" class="form-control" id="nome_motorista" placeholder="ex: Jõao Paulo">
                         </div>
                         <div class="form-group">
+                            <label for="contacto">Contacto</label>
+                            <input name="contacto" type="number" class="form-control" id="contacto" placeholder="ex: 820000">
+                        </div>
+                        <div class="form-group">
                             <label for="morada">Morada</label>
                             <input name="morada" type="text" class="form-control" id="morada" placeholder="Av. Eduardo Mondlane, n2526">
                         </div>
@@ -137,73 +161,6 @@
                         <input type="submit" value="Adicionar" class="btn btn-success" />
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal -->
-
-
-    <!-- Modal to Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Motorista</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="nome">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome" placeholder="ex: Jõao Paulo">
-                        </div>
-                        <div class="form-group">
-                            <label for="morada">Morada</label>
-                            <input type="text" class="form-control" id="morada" placeholder="Av. Eduardo Mondlane, n2526">
-                        </div>
-                        <div class="form-group">
-                            <label for="dataNasci">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="dataNasci">
-                        </div>
-                        <div class="form-group">
-                            <label for="nrCarta">Número da Carta</label>
-                            <input type="text" class="form-control" id="nrCarta" placeholder="Av. Eduardo Mondlane, n2526">
-                        </div>
-                        <div class="form-group">
-                            <label for="dataEmiCarta">Data de Emissão da Carta</label>
-                            <input type="date" class="form-control" id="dataEmiCarta">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                    <button type="button" class="btn btn-primary">Guardar Alterações</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Modal -->
-
-
-    <!-- Modal to Delete -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Apagar Motorista?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Pretende apagar o motorista nomemotorista?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                    <button type="button" class="btn btn-danger">Apagar</button>
-                </div>
             </div>
         </div>
     </div>

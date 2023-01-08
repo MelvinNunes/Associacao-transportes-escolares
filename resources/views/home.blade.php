@@ -16,7 +16,7 @@
             <h1 class="text-white">Encontre a carrinha ideal!</h1>
             <form action="/s" method="GET" class="form-inline my-2 my-lg-0 d-flex gap-2">
                 <input name="rota" class="form-control" type="search" placeholder="Pesquisar carrinhas, rotas..." aria-label="Search">
-                <input name="rota-search" class="btn btn-secondary my-2 my-sm-0" type="submit" value="Pesquisar">
+                <input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Pesquisar">
             </form>
         </div>
     </div>
@@ -24,7 +24,7 @@
     @if(count($carrinhas)!=0)
     <h2 class="px-4 pt-3">Carrinhas Disponíveis</h2>
     @else
-    <h2 class="px-4 pt-3">Nenhuma Carrinha Disponíveil</h2>
+    <h2 class="px-4 pt-3">Nenhuma Carrinha Disponível</h2>
     @endif
 
     @if(count($carrinhas)!=0)

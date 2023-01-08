@@ -18,15 +18,12 @@
                 <input name="rota" class="form-control mr-sm-2" type="search" placeholder="Pesquisar carrinhas, rotas..." aria-label="Search">
                 <input class="btn btn-secondary my-2 my-sm-0" value="Pesquisar" type="submit">
             </form>
-            <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="/contactos">Contactos</a>
-            </li> -->
             @guest
+            <li class="nav-item mx-2 ml-2">
+                <a class="nav-link" href="/login">Entrar</a>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" href="/entrar">Entrar</a>
+                <a class="nav-link" href="/register">Criar Conta</a>
             </li>
             @endguest
             @auth
@@ -35,10 +32,12 @@
                     Meu Perfil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                     <a class="dropdown-item" href="/perfil">Ver Perfil</a>
-                    <a class="dropdown-item" href="/userid/reservas">Ver Reservas</a>
+                    <a class="dropdown-item" href="/reservas">Ver Reservas</a>
                     <div class="dropdown-divider"></div>
                     <form action="/logout" method="POST">
+                        @csrf
                         <input value="Sair" class="dropdown-item" type="submit">
                     </form>
                 </div>

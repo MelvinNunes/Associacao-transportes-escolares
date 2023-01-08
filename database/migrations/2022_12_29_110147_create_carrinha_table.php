@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('contacto');
             $table->string('rota');
             $table->integer('nr_lugares');
-            $table->integer('nr_lugares_disponiveis');
-            $table->double('preco');
+            $table->integer('nr_lugares_ocupados');
+            $table->float('preco');
             $table->string('image');
             $table->unsignedBigInteger('criado_por')->nullable();
             $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nr_carta');
             $table->date('data_nasci');
             $table->date('data_emissao_carta');
+            $table->string('contacto');
             $table->unsignedBigInteger('criado_por')->nullable();
             $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('modificado_por')->nullable();

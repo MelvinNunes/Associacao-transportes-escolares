@@ -5,40 +5,66 @@
 </head>
 
 @section('content')
+@if(session('success'))
+<script>
+    swal("Sucesso!", "{{ session('success') }}", "success");
+</script>
+@endif
+@if(session('erro'))
+<script>
+    swal("Erro!", "{{ session('erro') }}", "error");
+</script>
+@endif
 <div class="container py-5">
     <div class="row">
         <div class="col">
             <div class="card bg-dark text-white">
-                <img class="card-img" src="/bus_two.jpg" alt="Card image">
+                <img class="card-img" src="/img/carrinhas/{{ $reserva->carrinha_reserva->image }}" alt="Card image">
                 <div class="card-img-overlay">
-                    <h5 class="card-title">NomeMotorista</h5>
+                    <h5 class="card-title">{{ $reserva->carrinha_reserva->motorista->nome_motorista }}</h5>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="d-flex">
-                <h2 class="mr-2">Carrinha - NomeRota</h2>
+                <h2 class="mr-2">{{ $reserva->carrinha_reserva->rota }}</h2>
                 <div class="d-flex align-items-center">
-                    <span class="rounded bg-warning px-2 py-1 text-white text-sm">Pendente</span>
+                    @if($reserva->estado == 'PENDENTE')
+                    <span class="rounded bg-warning px-2 py-1 text-white text-sm">{{ $reserva->estado }}</span>
+                    @else
+                    <span class="rounded bg-success px-2 py-1 text-white text-sm">{{ $reserva->estado }}</span>
+                    @endif
                 </div>
             </div>
             <h4>Descriçao</h4>
             <div class="d-flex flex-column gap-2">
-                <span>Lotação: </span>
-                <span>Preço (MZN): </span>
-                <span>Nome do Motorista: </span>
-                <span>Contacto do Motorista: </span>
-                <span>Lugares disponiveis: </span>
-                <span>Rota: </span>
-                <span>Reservado em: </span>
+                <span>Lotação: {{ $reserva->carrinha_reserva->nr_lugares }}</span>
+                <span>Preço (MZN): {{ $reserva->carrinha_reserva->preco }}</span>
+                <span>Nome do Motorista: {{ $reserva->carrinha_reserva->motorista->nome_motorista }}</span>
+                <span>Contacto do Motorista: {{ $reserva->carrinha_reserva->motorista->contacto }}</span>
+                <span>Lugares disponiveis: {{ $lugares_disponiveis }}</span>
+                <span>Rota: {{ $reserva->carrinha_reserva->rota }}</span>
+                <span>Reservado em: {{ date('d/m/Y H:m', strtotime($reserva->created_at)) }}</span>
             </div>
             <div>
-                <a href="/motorista/id" class="btn btn-secondary my-3">Ver Perfil do Motorista</a>
+                <a href="/motorista/{{ $reserva->carrinha_reserva->motorista->id }}" class="btn btn-secondary my-3">Ver Perfil do Motorista</a>
             </div>
-            <div class="d-flex">
+            @if($reserva->estado == 'PENDENTE')
+            <div class="d-flex align-items-center">
                 <button type="button" class="btn btn-primary mr-3 launch" data-toggle="modal" data-target="#staticBackdrop">Pagar Reserva</button>
-                <button class="btn btn-danger">Cancelar Reserva</button>
+                <form action="/reseva/apagar/{{ $reserva->id}}" method="POST">
+                    <input type="submit" class="btn btn-danger h-100" value="Cancelar Reserva">
+                </form>
             </div>
+            @else
+            <div class="mt-3">
+                <span class="text-danger">NB: Anular a reserva não reembolsa o valor pago!</span>
+            </div>
+            <div class="d-flex gap-3">
+                <button class="btn btn-danger mt-4">Anular Reserva</button>
+            </div>
+            @endif
+
         </div>
     </div>
 </div>
@@ -60,10 +86,16 @@
                             <div class="px-2 mt-2">
                                 <span>Pagamento pelo mpesa</span>
                                 <div class="mt-3">
-                                    <div class="inputbox">
-                                        <input type="text" name="name" class="form-control" placeholder="Insira o seu número de celular" required="required">
-                                    </div>
-                                    <div class="pay px-5"> <button class="btn btn-primary btn-block">Pagar</button> </div>
+                                    <form action="/reserva/pagar" method="POST">
+                                        @csrf
+                                        <input type="number" name="id_reserva" value="{{ $reserva->id }}" style="display: none;">
+                                        <div class="inputbox">
+                                            <input type="text" name="contacto" class="form-control" placeholder="Insira o seu número de celular" required="required">
+                                        </div>
+                                        <div class="pay px-5">
+                                            <input type="submit" class="btn btn-primary btn-block" value="Pagar">
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

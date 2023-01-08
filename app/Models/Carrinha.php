@@ -20,7 +20,7 @@ class Carrinha extends Model
 
     public function motorista()
     {
-        return $this->hasOne('App\Models\Motorista', 'id_motorista', 'id');
+        return $this->hasOne('App\Models\Motorista', 'id', 'id_motorista');
     }
 
     public function owner()

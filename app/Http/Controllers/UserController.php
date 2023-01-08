@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contacto;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,19 +16,19 @@ class UserController extends Controller
 
     public function me(Request $request)
     {
-        return view('user.profile');
+        $user = $request->user();
+        $user_reserves = Reserva::where('id_usuario', $user->id)->get();
+        $total_reservas = count($user_reserves);
+        return view('user.profile', ['user' => $user, 'total_reservas' => $total_reservas]);
     }
 
-    public function get_user_reserves()
+    public function update(Request $request)
     {
-        return view('user.reserves');
-    }
-
-    public function get_reserve($id, $reserve)
-    {
-        if ($id > 1) {
-            return view('user.reserve_details');
-        }
-        return view('user.reserve_details_pay');
+        $user = $request->user();
+        $user->name = $request->name;
+        $user->contact = $request->contact;
+        $user->address = $request->address;
+        $user->save();
+        return redirect('/perfil')->with('user_updated', 'sucess');
     }
 }

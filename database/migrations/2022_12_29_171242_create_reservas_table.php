@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_carrinha');
             $table->foreign('id_carrinha')->references('id')->on('carrinhas')->onDelete('cascade');
             $table->integer('nr_meses_reservado');
-            $table->boolean('estado');
+            $table->string('estado');
             $table->unsignedBigInteger('criado_por')->nullable();
             $table->foreign('criado_por')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('modificado_por')->nullable();
