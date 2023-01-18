@@ -13,7 +13,7 @@ class ClientsController extends Controller
         $user = auth()->user();
         if ($user->is_admin) {
             $clientes = Reserva::all();
-            return view('admin.clients', ['clientes' => $clientes]);
+            return view('admin.clients', ['reservas' => $clientes]);
         }
     }
 }
