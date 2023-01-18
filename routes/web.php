@@ -53,6 +53,8 @@ Route::get('/admin/motoristas/s', [MotoristaController::class, 'search_drivers']
 
 Route::get('/admin/clientes', [ClientsController::class, 'index'])->middleware('auth');
 
+Route::get('/admin/cliente/delete', [ClientsController::class, 'delete'])->middleware('auth');
+
 Route::get('/admin/perfil', [UserController::class, 'admin'])->middleware('auth');
 
 Route::get('/s', [IndexController::class, 'search_rota']);
