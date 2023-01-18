@@ -23,7 +23,7 @@ class ClientsController extends Controller
             $id = request('id'):
             $reserva = Reserva::where('id_usuario', $id)->first();
             $reserva->delete();
-            redirect("/admin/clientes")->with("success", "Usuario dissociado com sucesso!"); 
+            return redirect("/admin/clientes")->with("success", "Usuario dissociado com sucesso!"); 
         }
     }
 }
