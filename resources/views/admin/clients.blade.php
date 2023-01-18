@@ -37,19 +37,24 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($reservas as $cliente)
                 <tr>
-                    <td>Melvin Nunes</td>
-                    <td>8534141341</td>
-                    <td>Xipamanine</td>
-                    <td>Av Guerra popular 2526</td>
-                    <td>2022-01-01</td>
+                    <td>$reservas->usuario_reserva()->name</td>
+                    <td>$reservas->usuario_reserva()->contact</td>
+                    <td>$reservas->carrinha_reserva()->rota</td>
+                    <td>$reservas->usuario_reserva()->address</td>
+                    <td>$reservas->usuario_reserva()->address</td>
                     <td>
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                        <form action="/admin/cliente/delete" method="POST">
+                        @csrf
+                        <span style="display: none">$reservas->usuario_reserva()->id</span>
+                        <input type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                             Dissociar
-                        </button>
+                        </input>
+                        </form>
                     </td>
                 </tr>
-
+                @endforeach
             </tbody>
         </table>
     </div>
