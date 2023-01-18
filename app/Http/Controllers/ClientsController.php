@@ -16,4 +16,14 @@ class ClientsController extends Controller
             return view('admin.clients', ['reservas' => $clientes]);
         }
     }
+    
+    public function delete(){
+        $user = auth()->user();
+        if ($user->is_admin) {
+            $id = request('id'):
+            $reserva = Reserva::where('id_usuario', $id)->first();
+            $reserva->delete();
+            redirect("/admin/clientes")->with("success", "Usuario dissociado com sucesso!"); 
+        }
+    }
 }
