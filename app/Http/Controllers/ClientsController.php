@@ -20,7 +20,7 @@ class ClientsController extends Controller
     public function delete(){
         $user = auth()->user();
         if ($user->is_admin) {
-            $id = request('id'):
+            $id = request('id');
             $reserva = Reserva::where('id_usuario', $id)->first();
             $reserva->delete();
             return redirect("/admin/clientes")->with("success", "Usuario dissociado com sucesso!"); 

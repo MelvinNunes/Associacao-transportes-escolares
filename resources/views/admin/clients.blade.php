@@ -3,6 +3,11 @@
 @section('admin-content')
 <!-- Table with content -->
 <div class="mt-3">
+    @if(session('success'))
+    <script>
+        swal("Sucesso!", "Cliente dissociado com sucesso!", "success");
+    </script>
+    @endif
     <!-- Search -->
     <div class="input-group d-flex justify-content-end">
         <div class="form-outline">
@@ -39,18 +44,16 @@
             <tbody>
                 @foreach($reservas as $cliente)
                 <tr>
-                    <td>$reservas->usuario_reserva()->name</td>
-                    <td>$reservas->usuario_reserva()->contact</td>
-                    <td>$reservas->carrinha_reserva()->rota</td>
-                    <td>$reservas->usuario_reserva()->address</td>
-                    <td>$reservas->usuario_reserva()->address</td>
+                    <td>{{$reservas[$loop->index]->usuario_reserva->name}}</td>
+                    <td>{{$reservas[$loop->index]->usuario_reserva->contact}}</td>
+                    <td>{{$reservas[$loop->index]->carrinha_reserva->rota}}</td>
+                    <td>{{$reservas[$loop->index]->usuario_reserva->address}}</td>
+                    <td>{{ $reservas[$loop->index]->usuario_reserva->address }}</td>
                     <td>
                         <form action="/admin/cliente/delete" method="POST">
                         @csrf
-                        <span style="display: none">$reservas->usuario_reserva()->id</span>
-                        <input type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                            Dissociar
-                        </input>
+                                <input type="number" name="id" style="display: none" value="{{$reservas[$loop->index]->usuario_reserva->id}}"/>
+                                <input type="submit" value="Dissociar" class="btn btn-danger"/>
                         </form>
                     </td>
                 </tr>
