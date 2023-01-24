@@ -29,10 +29,10 @@ class ReservaController extends Controller
             $reserva->id_usuario = $user->id;
             $reserva->id_carrinha = $request->id_carrinha;
             $reserva->estado = "PENDENTE";
-            if ($request->nr_meses_reservado < 12) {
+            if ($request->nr_meses_reservado < 12 && $request->nr_meses_reservado > 0) {
                 $reserva->nr_meses_reservado = $request->nr_meses_reservado;
             } else {
-                return redirect("/carrinhas" .  "/" . $rota)->with("error", "Só pode reservar uma carrinha até 1 ano (12 meses)!");
+                return redirect("/carrinhas" .  "/" . $rota)->with("error", "Só pode reservar uma carrinha até 1 ano (De 1 a 12 meses)!");
             }
             $reserva->save();
 

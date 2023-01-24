@@ -23,11 +23,11 @@
                 <h2>{{ $carrinha->rota }}</h2>
                 <h4>Descriçao</h4>
                 <div class="d-flex flex-column gap-2">
-                    <span>Lotação: {{ $carrinha->nr_lugares }}</span>
-                    <span>Preço (MZN): {{ $carrinha->preco }}</span>
+                    <span>Lotação: {{ $carrinha->nr_lugares }} lugares</span>
+                    <span>Preço (MZN): {{ $carrinha->preco }} MT</span>
                     <span>Nome do Motorista: {{ $carrinha->motorista->nome_motorista }}</span>
                     <span>Contacto do Motorista: {{ $carrinha->motorista->contacto }}</span>
-                    <span>Lugares disponiveis: {{ $lugares_disponiveis }}</span>
+                    <span>Lugares disponiveis: {{ $lugares_disponiveis }} lugares</span>
                     <span>Rota: {{ $carrinha->rota }}</span>
                 </div>
                 @auth
@@ -36,7 +36,7 @@
                     <input name="rota" type="text" value="{{ $carrinha->rota }}" style="display: none;">
                     <input name="id_carrinha" type="number" value="{{ $carrinha->id }}" style="display: none;">
                     <label for="nr_meses_reservado">QTD Meses a reservar:</label>
-                    <input name="nr_meses_reservado" type="number" class="form-control" placeholder="Qtd Meses a reservar">
+                    <input min="0" name="nr_meses_reservado" type="number" class="form-control w-25 my-2" placeholder="Qtd Meses a reservar">
                 </div>
                 <input type="submit" value="Fazer reserva" class="btn btn-success mt-4">
                 @else

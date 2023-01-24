@@ -32,7 +32,9 @@
     @include('navbar')
 
     <div class="mt-5">
+        <div class="mt-5">
         @yield('content')
+        </div>
     </div>
 
 </body>

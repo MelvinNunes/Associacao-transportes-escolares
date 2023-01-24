@@ -38,21 +38,24 @@
             </div>
             <h4>Descriçao</h4>
             <div class="d-flex flex-column gap-2">
-                <span>Lotação: {{ $reserva->carrinha_reserva->nr_lugares }}</span>
-                <span>Preço (MZN): {{ $reserva->carrinha_reserva->preco }}</span>
+                <span>Rota: {{ $reserva->carrinha_reserva->rota }}</span>
+                <span>Lotação: {{ $reserva->carrinha_reserva->nr_lugares }} Lugares</span>
+                <span>Total de Meses Reservado: {{ $reserva->nr_meses_reservado }} Mês(es)</span>
+                <span>Preço Mensal: {{ $reserva->carrinha_reserva->preco }} MT</span>
+                <span>Preço Total: {{ $reserva->carrinha_reserva->preco *  $reserva->nr_meses_reservado}} MT</span>
                 <span>Nome do Motorista: {{ $reserva->carrinha_reserva->motorista->nome_motorista }}</span>
                 <span>Contacto do Motorista: {{ $reserva->carrinha_reserva->motorista->contacto }}</span>
-                <span>Lugares disponiveis: {{ $lugares_disponiveis }}</span>
-                <span>Rota: {{ $reserva->carrinha_reserva->rota }}</span>
-                <span>Reservado em: {{ date('d/m/Y H:m', strtotime($reserva->created_at)) }}</span>
+                <span>Lugares disponiveis: {{ $lugares_disponiveis }} Lugares</span>
+                <span class="my-3">Reservado em: {{ date('d/m/Y H:m', strtotime($reserva->created_at)) }}</span>
             </div>
-            <div>
-                <a href="/motorista/{{ $reserva->carrinha_reserva->motorista->id }}" class="btn btn-secondary my-3">Ver Perfil do Motorista</a>
+            <div class="w-50">
+                <a href="/motorista/{{ $reserva->carrinha_reserva->motorista->id }}" class="btn btn-secondary my-3 w-100">Ver Perfil do Motorista</a>
             </div>
             @if($reserva->estado == 'PENDENTE')
             <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-primary mr-3 launch" data-toggle="modal" data-target="#staticBackdrop">Pagar Reserva</button>
                 <form action="/reseva/apagar/{{ $reserva->id}}" method="POST">
+                    <button type="button" class="btn btn-primary mr-3 h-100 launch" data-toggle="modal" data-target="#staticBackdrop">Pagar Reserva</button>
+                    @csrf
                     <input type="submit" class="btn btn-danger h-100" value="Cancelar Reserva">
                 </form>
             </div>
