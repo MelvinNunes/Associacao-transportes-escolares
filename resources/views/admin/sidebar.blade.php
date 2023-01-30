@@ -33,6 +33,9 @@
         <li>
             <a href="/admin/clientes">Clientes</a>
         </li>
+        <li>
+            <a href="/">Página Inicial</a>
+        </li>
         <!-- <li>
             <a href="/admin/perfil">Meu Perfil</a>
         </li> -->

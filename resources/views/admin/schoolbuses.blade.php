@@ -147,15 +147,15 @@
                         </div>
                         <div class="form-group">
                             <label for="contacto">Contacto</label>
-                            <input type="text" name="contacto" class="form-control" id="contacto" placeholder="ex: 840000000">
+                            <input min="0" type="text" name="contacto" class="form-control" id="contacto" placeholder="ex: 840000000">
                         </div>
                         <div class="form-group">
                             <label for="nr_lugares">Lotação</label>
-                            <input type="number" name="nr_lugares" class="form-control" id="nr_lugares" placeholder="ex: 25">
+                            <input min="1" type="number" name="nr_lugares" class="form-control" id="nr_lugares" placeholder="ex: 25">
                         </div>
                         <div class="form-group">
                             <label for="preco">Preço Mensal (MZN)</label>
-                            <input type="number" name="preco" class="form-control" id="preco" placeholder="ex: 500.00">
+                            <input min="1" type="number" name="preco" class="form-control" id="preco" placeholder="ex: 500.00">
                         </div>
                         <div class="form-group">
                             <label for="image">Foto da carrinha</label>

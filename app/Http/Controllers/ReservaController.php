@@ -82,6 +82,9 @@ class ReservaController extends Controller
         $reserva = Reserva::where('id', $id)->first();
         $user = auth()->user();
         if ($reserva->id_usuario = $user->id) {
+            $carrinha = Carrinha::where('id', $reserva->id_carrinha)->firstOrFail();
+            $carrinha->nr_lugares_ocupados = $carrinha->nr_lugares_ocupados - 1;
+            $carrinha->save();
             $reserva->delete();
             return redirect('/reservas')->with('deleted', 'Reserva cancelada com sucesso!');
         }

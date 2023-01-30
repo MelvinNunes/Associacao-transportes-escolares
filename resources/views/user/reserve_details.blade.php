@@ -64,7 +64,10 @@
                 <span class="text-danger">NB: Anular a reserva não reembolsa o valor pago!</span>
             </div>
             <div class="d-flex gap-3">
-                <button class="btn btn-danger mt-4">Anular Reserva</button>
+            <form action="/reseva/apagar/{{ $reserva->id}}" method="POST">
+                    @csrf
+                    <input type="submit" class="btn btn-danger mt-5" value="Cancelar Reserva">
+            </form>
             </div>
             @endif
 
@@ -87,13 +90,16 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
                             <div class="px-2 mt-2">
-                                <span>Pagamento pelo mpesa</span>
+                                <div class="d-flex flex-column">
+                                    <span>Pagamento pelo mpesa</span>
+                                    <span class="my-2">Sugestão: 841234567</span>
+                                </div>
                                 <div class="mt-3">
                                     <form action="/reserva/pagar" method="POST">
                                         @csrf
                                         <input type="number" name="id_reserva" value="{{ $reserva->id }}" style="display: none;">
                                         <div class="inputbox">
-                                            <input type="text" name="contacto" class="form-control" placeholder="Insira o seu número de celular" required="required">
+                                            <input min="0" type="text" name="contacto" class="form-control" placeholder="Insira o seu número de celular" required="required">
                                         </div>
                                         <div class="pay px-5">
                                             <input type="submit" class="btn btn-primary btn-block" value="Pagar">

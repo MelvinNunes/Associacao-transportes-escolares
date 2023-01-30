@@ -137,7 +137,7 @@
                         </div>
                         <div class="form-group">
                             <label for="contacto">Contacto</label>
-                            <input name="contacto" type="number" class="form-control" id="contacto" placeholder="ex: 820000">
+                            <input min="0" name="contacto" type="number" class="form-control" id="contacto" placeholder="ex: 820000">
                         </div>
                         <div class="form-group">
                             <label for="morada">Morada</label>
@@ -149,7 +149,7 @@
                         </div>
                         <div class="form-group">
                             <label for="nr_carta">Número da Carta</label>
-                            <input name="nr_carta" type="text" class="form-control" id="nr_carta" placeholder="Número da Carta">
+                            <input min="0" name="nr_carta" type="text" class="form-control" id="nr_carta" placeholder="Número da Carta">
                         </div>
                         <div class="form-group">
                             <label for="data_emissao_carta">Data de Emissão da Carta</label>
