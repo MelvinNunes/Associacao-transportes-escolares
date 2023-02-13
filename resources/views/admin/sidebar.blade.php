@@ -7,34 +7,20 @@
 
     <ul class="list-unstyled components">
         <!-- <p class="text-secondary">Katia M</p> -->
-        <li>
+        <li class="{{ (request()->is('admin')) ? 'bg-primary' : '' }}">
             <a href="/admin">Home</a>
         </li>
-        <!-- <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Meu Perfil</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Editar Perfil</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li> -->
-        <li>
+        <li class="{{ request()->is('/admin/motoristas') ? 'bg-primary' : '' }}">
             <a href="/admin/motoristas">Motoristas</a>
         </li>
-        <li>
+        <li class="{{ (request()->is('carrinhas')) ? 'bg-primary' : '' }}">
             <a href="/admin/carrinhas">Carrinhas</a>
         </li>
-        <li>
+        <li class="{{ (request()->is('clientes')) ? 'bg-primary' : '' }}">
             <a href="/admin/clientes">Clientes</a>
         </li>
         <li>
-            <a href="/">Página Inicial</a>
+            <a href="/">Página Inicial - Aplicação</a>
         </li>
         <!-- <li>
             <a href="/admin/perfil">Meu Perfil</a>

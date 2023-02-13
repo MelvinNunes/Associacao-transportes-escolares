@@ -29,6 +29,10 @@ class IndexController extends Controller
                 ['rota', 'like', '%' . $search . '%']
             ])->get();
         }
-        return view('search', ['carrinhas' => $carrinhas, 'search' => $search]);
+        if (!empty($carrinhas)) {
+            return view('search', ['carrinhas' => $carrinhas, 'search' => $search]);
+        }
+
+        return view('search', ['carrinhas' => [], 'search' => $search]);
     }
 }

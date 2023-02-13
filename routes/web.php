@@ -25,9 +25,9 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
 
-Route::get('/admin', [AdminController::class, 'index'])->middleware('auth');
+Route::get('/admin', [AdminController::class, 'index'])->middleware('auth')->name('admin');
 
-Route::get('/admin/carrinhas', [CarrinhaController::class, 'index_admin'])->middleware('auth');
+Route::get('/admin/carrinhas', [CarrinhaController::class, 'index_admin'])->middleware('auth')->name('carrinhas');
 
 Route::post('/admin/carrinha', [CarrinhaController::class, 'store'])->middleware('auth');
 
@@ -39,7 +39,7 @@ Route::post('/admin/carrinha/delete/{id}', [CarrinhaController::class, 'destroy'
 
 Route::get('/admin/carrinhas/s', [CarrinhaController::class, 'search_carrinhas'])->middleware('auth');
 
-Route::get('/admin/motoristas', [MotoristaController::class, 'index'])->middleware('auth');
+Route::get('/admin/motoristas', [MotoristaController::class, 'index'])->middleware('auth')->name('motoristas');
 
 Route::post('/admin/motorista', [MotoristaController::class, 'store'])->middleware('auth');
 
@@ -51,7 +51,7 @@ Route::post('/admin/motorista/delete/{id}', [MotoristaController::class, 'destro
 
 Route::get('/admin/motoristas/s', [MotoristaController::class, 'search_drivers'])->middleware('auth');
 
-Route::get('/admin/clientes', [ClientsController::class, 'index'])->middleware('auth');
+Route::get('/admin/clientes', [ClientsController::class, 'index'])->middleware('auth')->name('clientes');
 
 Route::post('/admin/cliente/delete', [ClientsController::class, 'delete'])->middleware('auth');
 

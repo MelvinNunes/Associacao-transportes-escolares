@@ -9,7 +9,7 @@
     </script>
     @endif
     <!-- Search -->
-    <div class="input-group d-flex justify-content-end">
+    <!-- <div class="input-group d-flex justify-content-end">
         <div class="form-outline">
             <div class="d-flex gap-2">
                 <input type="search" id="form1" class="form-control" placeholder="Nome do Cliente" />
@@ -18,9 +18,10 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- EndSearch -->
     <div class="mt-3">
+        <h1 class="my-3">Clientes e Respectivas Reservas</h1>
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
                 <tr>
@@ -51,9 +52,9 @@
                     <td>{{ $reservas[$loop->index]->usuario_reserva->address }}</td>
                     <td>
                         <form action="/admin/cliente/delete" method="POST">
-                        @csrf
-                                <input type="number" name="id" style="display: none" value="{{$reservas[$loop->index]->usuario_reserva->id}}"/>
-                                <input type="submit" value="Dissociar" class="btn btn-danger"/>
+                            @csrf
+                            <input type="number" name="id" style="display: none" value="{{$reservas[$loop->index]->usuario_reserva->id}}" />
+                            <input type="submit" value="Dissociar" class="btn btn-danger" />
                         </form>
                     </td>
                 </tr>
